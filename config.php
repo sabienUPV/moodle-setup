@@ -17,13 +17,13 @@ $CFG->dboptions = array(
   'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
-// ¡Lee la URL del .env dinámicamente!
+// Read the URL from the .env dynamically!
 $CFG->wwwroot   = getenv('EXTERNAL_ROOT_URL') ?: 'http://localhost:8080';
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 $CFG->directorypermissions = 02777;
 
-// Si estás en https (staging), Moodle debe saberlo detrás del proxy
+// If using HTTPS (staging/prod), Moodle needs to know it's behind a proxy
 if (strpos($CFG->wwwroot, 'https://') === 0) {
     $CFG->sslproxy = true;
 }

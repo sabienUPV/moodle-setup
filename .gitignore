@@ -1,0 +1,15 @@
+# Environment variables and secrets
+.env
+
+# Locally generated data volume directories
+mariadb_data/
+moodledata/
+proxy/
+
+# Moodle source code (downloaded via git clone)
+html/
+
+# System and log files
+*.log
+.DS_Store
+Thumbs.db

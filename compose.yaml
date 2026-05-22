@@ -17,9 +17,9 @@ services:
     container_name: moodle-app
     restart: unless-stopped
     volumes:
-      # El código fuente de Moodle controlado por Git
+      # Moodle source code tracked by Git
       - ./html:/var/www/html
-      # Archivos persistentes (PDFs, fotos de alumnos, etc.)
+      # Persistent files (user uploads, course files, etc.)
       - ./moodledata:/var/www/moodledata
     depends_on:
       - moodle-db
