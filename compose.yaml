@@ -1,7 +1,6 @@
 services:
   moodle-db:
     image: mariadb:10.11
-    container_name: moodle-db
     restart: unless-stopped
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
@@ -17,7 +16,6 @@ services:
       context: .
       dockerfile: moodle.Dockerfile
       target: moodle-prod # Safe production image with security settings applied by default
-    container_name: moodle-app
     restart: unless-stopped
     volumes:
       # Moodle source code tracked by Git

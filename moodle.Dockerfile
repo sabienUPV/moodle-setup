@@ -1,7 +1,7 @@
 FROM moodlehq/moodle-php-apache:8.3 as moodle
 
 # Inject the Apache Router configuration directly into the image
-COPY ./apache-config/moodle-router.conf /etc/apache2/conf-enabled/moodle-router.conf
+COPY ./moodle-router.conf /etc/apache2/conf-enabled/moodle-router.conf
 
 FROM moodle as moodle-prod
 
