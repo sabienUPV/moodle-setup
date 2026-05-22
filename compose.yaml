@@ -21,5 +21,7 @@ services:
       - ./html:/var/www/html
       # Persistent files (user uploads, course files, etc.)
       - ./moodledata:/var/www/moodledata
+      # Apache configuration for Moodle router (fixes 'CheckRouter not configured' warning and enables clean URLs)
+      - ./apache-config/moodle-router.conf:/etc/apache2/conf-enabled/moodle-router.conf
     depends_on:
       - moodle-db
