@@ -22,7 +22,7 @@ if [ "$init_mode" = true ]; then
   # Clone Moodle if the html directory does not exist or is empty
   if [ ! -d "html" ] || [ -z "$(ls -A html)" ]; then
     echo "Cloning official Moodle repository (5.2 Current Stable branch)..."
-    git clone -b MOODLE_502_STABLE --single-branch https://github.com/moodle/moodle.git html
+    git clone --depth=1 -b MOODLE_502_STABLE --single-branch https://github.com/moodle/moodle.git html
   else
     echo "The 'html' directory already exists. Skipping clone."
   fi
