@@ -31,4 +31,12 @@ if (strpos($CFG->wwwroot, 'https://') === 0) {
 // Let Moodle know that we configured the Moodle Router (with the 99-moodle-router.sh entrypoint script)
 $CFG->routerconfigured = true;
 
+// Enable Slash Arguments (vital for modern routing, images, and SCORM packages)
+$CFG->slasharguments = true;
+
+// Performance optimization: Use native Linux command to calculate directory sizes
+$CFG->pathtodu = '/usr/bin/du';
+
+require_once(__DIR__ . '/lib/setup.php');
+
 require_once(__DIR__ . '/lib/setup.php');
