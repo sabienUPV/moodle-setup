@@ -2,12 +2,8 @@
 .env
 
 # Locally generated data volume directories
-mariadb_data/
-moodledata/
-proxy/
-
-# Moodle source code (downloaded via git clone)
-html/
+# this includes the Moodle source code (downloaded via git clone)
+bind-mounts/
 
 # System and log files
 *.log

@@ -17,11 +17,11 @@ if [ "$init_mode" = true ]; then
   echo "Starting directory setup to avoid root permission issues..."
   
   # Create directories for volumes
-  mkdir -p moodledata mariadb_data proxy/data proxy/letsencrypt
+  mkdir -p bind-mounts/moodledata bind-mounts/mariadb_data bind-mounts/proxy/data bind-mounts/proxy/letsencrypt
 
   # Change the owner of Moodle's data folder to user 33 (www-data)
   # so the web server has the necessary permissions to read/write files
-  sudo chown -R 33:33 moodledata
+  sudo chown -R 33:33 bind-mounts/moodledata
   
   # Clone Moodle if the html directory does not exist or is empty
   if [ ! -d "bind-mounts/html" ] || [ -z "$(ls -A bind-mounts/html)" ]; then

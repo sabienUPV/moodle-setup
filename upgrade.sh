@@ -11,12 +11,12 @@ fi
 NEW_BRANCH="$1"
 
 # Check if Moodle is initialized
-if [ ! -d "html/.git" ]; then
-  echo "Error: Moodle repository not found in html/. Run ./up.sh --init first."
+if [ ! -d "bind-mounts/html/.git" ]; then
+  echo "Error: Moodle repository not found in bind-mounts/html/. Run ./up.sh --init first."
   exit 1
 fi
 
-cd html
+cd bind-mounts/html
 
 if [ -z "$NEW_BRANCH" ]; then
   echo "Fetching latest patches for the current branch..."
