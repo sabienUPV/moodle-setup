@@ -19,8 +19,9 @@ if [ "$init_mode" = true ]; then
   # Create directories for volumes
   mkdir -p moodledata mariadb_data proxy/data proxy/letsencrypt
 
-  # Give web server permissions to write to Moodle's data folder
-  chmod -R 777 moodledata
+  # Change the owner of Moodle's data folder to user 33 (www-data)
+  # so the web server has the necessary permissions to read/write files
+  sudo chown -R 33:33 moodledata
   
   # Clone Moodle if the html directory does not exist or is empty
   if [ ! -d "html" ] || [ -z "$(ls -A html)" ]; then
