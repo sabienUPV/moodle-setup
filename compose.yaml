@@ -13,7 +13,7 @@ services:
       - ./mariadb_data:/var/lib/mysql
 
   moodle:
-    image: moodlehq/moodle-php-apache:8.1
+    image: moodlehq/moodle-php-apache:8.3
     container_name: moodle-app
     restart: unless-stopped
     volumes:
