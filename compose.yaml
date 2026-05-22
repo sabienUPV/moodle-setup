@@ -13,7 +13,10 @@ services:
       - ./mariadb_data:/var/lib/mysql
 
   moodle:
-    image: moodlehq/moodle-php-apache:8.3
+    build:
+      context: .
+      dockerfile: moodle.Dockerfile
+      target: moodle-prod
     container_name: moodle-app
     restart: unless-stopped
     volumes:
@@ -21,7 +24,5 @@ services:
       - ./html:/var/www/html
       # Persistent files (user uploads, course files, etc.)
       - ./moodledata:/var/www/moodledata
-      # Apache configuration for Moodle router (fixes 'CheckRouter not configured' warning and enables clean URLs)
-      - ./apache-config/moodle-router.conf:/etc/apache2/conf-enabled/moodle-router.conf
     depends_on:
       - moodle-db

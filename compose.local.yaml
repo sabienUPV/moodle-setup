@@ -1,6 +1,8 @@
 services:
   moodle:
+    build:
+      context: .
+      dockerfile: moodle.Dockerfile
+      target: moodle # Use the 'moodle' stage for local development to get better error messages and stack traces
     ports:
       - "8080:80"
-    volumes:
-      - ./php-config-dev.ini:/usr/local/etc/php/conf.d/99-moodle-security.ini
