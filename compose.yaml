@@ -16,7 +16,7 @@ services:
     build:
       context: .
       dockerfile: moodle.Dockerfile
-      target: moodle-prod
+      target: moodle-prod # Safe production image with security settings applied by default
     container_name: moodle-app
     restart: unless-stopped
     volumes:
@@ -26,3 +26,19 @@ services:
       - ./moodledata:/var/www/moodledata
     depends_on:
       - moodle-db
+
+  moodle-cron:
+    build:
+      context: .
+      dockerfile: moodle.Dockerfile
+      target: moodle-prod
+    container_name: moodle-cron
+    restart: unless-stopped
+    volumes:
+      - ./html:/var/www/html
+      - ./moodledata:/var/www/moodledata
+    depends_on:
+      - moodle-db
+    # Instead of running the Apache web server, this container runs the Moodle cron every minute in an infinite loop
+    command: >
+      sh -c "while true; do php /var/www/html/admin/cli/cron.php; sleep 60; done"

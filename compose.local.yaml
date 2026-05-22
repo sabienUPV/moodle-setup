@@ -6,3 +6,8 @@ services:
       target: moodle # Use the 'moodle' stage for local development to get better error messages and stack traces
     ports:
       - "8080:80"
+  moodle-cron:
+    build:
+      context: .
+      dockerfile: moodle.Dockerfile
+      target: moodle # Also use the 'moodle' stage for the cron container in local development to get better error messages and stack traces
