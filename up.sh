@@ -41,7 +41,7 @@ if [ "$init_mode" = true ]; then
   
   # Run Composer to install PHP dependencies (downloading composer.phar on the fly)
   echo "Installing Composer dependencies..."
-  docker compose run --rm --user 33 -w /var/www/html moodle sh -c "\
+  docker compose run --rm -w /var/www/html moodle sh -c "\
     php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" && \
     php composer-setup.php && \
     php composer.phar install --no-dev --classmap-authoritative && \
