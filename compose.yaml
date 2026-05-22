@@ -1,0 +1,25 @@
+services:
+  moodle-db:
+    image: mariadb:10.11
+    container_name: moodle-db
+    restart: unless-stopped
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - ./mariadb_data:/var/lib/mysql
+
+  moodle:
+    image: moodlehq/moodle-php-apache:8.1
+    container_name: moodle-app
+    restart: unless-stopped
+    volumes:
+      # El código fuente de Moodle controlado por Git
+      - ./html:/var/www/html
+      # Archivos persistentes (PDFs, fotos de alumnos, etc.)
+      - ./moodledata:/var/www/moodledata
+    depends_on:
+      - moodle-db
