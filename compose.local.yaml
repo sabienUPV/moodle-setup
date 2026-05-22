@@ -2,3 +2,5 @@ services:
   moodle:
     ports:
       - "8080:80"
+    volumes:
+      - ./php-config-dev.ini:/usr/local/etc/php/conf.d/99-moodle-security.ini

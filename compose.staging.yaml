@@ -10,3 +10,4 @@ services:
     volumes:
       - ./proxy/data:/data
       - ./proxy/letsencrypt:/etc/letsencrypt
+      - ./php-config-prod.ini:/usr/local/etc/php/conf.d/99-moodle-security.ini

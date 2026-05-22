@@ -38,6 +38,14 @@ if [ "$init_mode" = true ]; then
   else
     echo "⚠️ Warning: config.php not found in the project root."
   fi
+  
+  # Run Composer to install PHP dependencies (downloading composer.phar on the fly)
+  echo "Installing Composer dependencies..."
+  docker compose run --rm --user 33 -w /var/www/html moodle sh -c "\
+    php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\" && \
+    php composer-setup.php && \
+    php composer.phar install --no-dev --classmap-authoritative && \
+    rm composer-setup.php composer.phar"
 
   echo "Initialization completed."
 fi
