@@ -28,4 +28,7 @@ if (strpos($CFG->wwwroot, 'https://') === 0) {
     $CFG->sslproxy = true;
 }
 
+// Let Moodle know that we configured the Moodle Router (with the 99-moodle-router.sh entrypoint script)
+$CFG->routerconfigured = true;
+
 require_once(__DIR__ . '/lib/setup.php');
