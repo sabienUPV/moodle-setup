@@ -1,13 +1,11 @@
 services:
   moodle:
-    build:
-      context: .
-      dockerfile: moodle.Dockerfile
-      target: moodle # Use the 'moodle' stage for local development to get better error messages and stack traces
     ports:
       - "8080:80"
+    environment:
+      # Revert security measure from prod in dev so logs include sensitive information for debugging
+      - PHP_INI-zend.exception_ignore_args=Off
   moodle-cron:
-    build:
-      context: .
-      dockerfile: moodle.Dockerfile
-      target: moodle # Also use the 'moodle' stage for the cron container in local development to get better error messages and stack traces
+    environment:
+      # Revert security measure from prod in dev so logs include sensitive information for debugging
+      - PHP_INI-zend.exception_ignore_args=Off

@@ -24,17 +24,17 @@ if [ "$init_mode" = true ]; then
   sudo chown -R 33:33 moodledata
   
   # Clone Moodle if the html directory does not exist or is empty
-  if [ ! -d "html" ] || [ -z "$(ls -A html)" ]; then
+  if [ ! -d "bind-mounts/html" ] || [ -z "$(ls -A bind-mounts/html)" ]; then
     echo "Cloning official Moodle repository (5.2 Current Stable branch)..."
-    git clone --depth=1 -b MOODLE_502_STABLE --single-branch git://git.moodle.org/moodle.git html
+    git clone --depth=1 -b MOODLE_502_STABLE --single-branch git://git.moodle.org/moodle.git bind-mounts/html
   else
-    echo "The 'html' directory already exists. Skipping clone."
+    echo "The 'bind-mounts/html' directory already exists. Skipping clone."
   fi
 
   # Copy configuration
   if [ -f "config.php" ]; then
-    echo "Copying config.php to html/..."
-    cp config.php html/config.php
+    echo "Copying config.php to bind-mounts/html/..."
+    cp config.php bind-mounts/html/config.php
   else
     echo "⚠️ Warning: config.php not found in the project root."
   fi
