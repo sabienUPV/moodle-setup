@@ -38,5 +38,3 @@ $CFG->slasharguments = true;
 $CFG->pathtodu = '/usr/bin/du';
 
 require_once(__DIR__ . '/lib/setup.php');
-
-require_once(__DIR__ . '/lib/setup.php');
