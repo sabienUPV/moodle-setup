@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y git unzip && rm -rf /var/lib/apt/lists/
 
 # Clear the default html folder and clone the Moodle core repository (5.2 Stable branch)
 RUN rm -rf /var/www/html \
-    && git clone --depth=1 -b MOODLE_502_STABLE git://git.moodle.org/moodle.git /var/www/html
+    && git clone --depth=1 -b MOODLE_502_STABLE https://github.com/moodle/moodle.git /var/www/html
 
 # Copy the custom configuration file
 COPY config.php /var/www/html/config.php
