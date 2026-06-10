@@ -16,6 +16,10 @@ services:
     build: .
     restart: unless-stopped
     environment:
+      - EXTERNAL_ROOT_URL=${EXTERNAL_ROOT_URL}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
       # Fixes zend.exception_ignore_args warning, removes sensitive information from logs in prod
       - PHP_INI-zend.exception_ignore_args=On
     volumes:
@@ -29,6 +33,10 @@ services:
     container_name: moodle-cron
     restart: unless-stopped
     environment:
+      - EXTERNAL_ROOT_URL=${EXTERNAL_ROOT_URL}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
       - PHP_INI-zend.exception_ignore_args=On
     volumes:
       - moodle_data:/var/www/moodledata
