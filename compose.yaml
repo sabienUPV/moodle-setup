@@ -9,37 +9,35 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
-      - ./bind-mounts/mariadb_data:/var/lib/mysql
+      # Managed Docker volume for database persistence
+      - moodle_db_data:/var/lib/mysql
 
   moodle:
-    image: moodlehq/moodle-php-apache:8.3
+    build: .
     restart: unless-stopped
     environment:
       # Fixes zend.exception_ignore_args warning, removes sensitive information from logs in prod
       - PHP_INI-zend.exception_ignore_args=On
     volumes:
-      # Moodle source code tracked by Git
-      - ./bind-mounts/html:/var/www/html
-      # Persistent files (user uploads, course files, etc.)
-      - ./bind-mounts/moodledata:/var/www/moodledata
-      # Mount our custom initialization scripts
-      - ./entrypoint-scripts:/docker-entrypoint.d
+      # Managed Docker volume for persistent Moodle data (uploaded files, cache, etc.)
+      - moodle_data:/var/www/moodledata
     depends_on:
       - moodle-db
 
   moodle-cron:
-    image: moodlehq/moodle-php-apache:8.3
+    build: .
     container_name: moodle-cron
     restart: unless-stopped
     environment:
-      # Fixes zend.exception_ignore_args warning, removes sensitive information from logs in prod
       - PHP_INI-zend.exception_ignore_args=On
     volumes:
-      - ./bind-mounts/html:/var/www/html
-      - ./bind-mounts/moodledata:/var/www/moodledata
-      - ./entrypoint-scripts:/docker-entrypoint.d
+      - moodle_data:/var/www/moodledata
     depends_on:
       - moodle-db
-    # Instead of running the Apache web server, this container runs the Moodle cron every minute in an infinite loop
+    # Runs the Moodle cron task every minute instead of starting the Apache server
     command: >
       sh -c "while true; do php /var/www/html/admin/cli/cron.php; sleep 60; done"
+
+volumes:
+  moodle_db_data:
+  moodle_data:
